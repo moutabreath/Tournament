@@ -3,3 +3,11 @@
 ################################################################################
 
 /Interfaces/obj
+/.vscode
+/.vs/Tournament/v17
+/.vs/Tournament/project-colors.json
+/Repository.Mongo/obj
+/Tournament/obj
+/Tournament.Common/obj
+/.ionide/symbolCache.db
+/.vs/Tournament/DesignTimeBuild/.dtbcache.v2

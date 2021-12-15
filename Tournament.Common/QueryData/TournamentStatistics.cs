@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Tournament.Common.Objects.QueryData
+﻿namespace Tournament.Common.Objects.QueryData
 {
     public class TournamentStatistics
     {
+        public IEnumerable<Tuple<int, double>> successPerQuestion { get; set; }
+        public IList<Tuple<Guid, char>> userScores { get; set; }
     }
 }

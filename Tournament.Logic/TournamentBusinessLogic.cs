@@ -17,7 +17,7 @@ namespace Tournament.Logic
             _logger = logger;
         }
 
-        /***
+        /**
          * 
          * Success Per Question: The percentage of users who answered it correctly
            Note: This will be a list of questions with a percentage attached to each one
@@ -56,7 +56,7 @@ namespace Tournament.Logic
         }
 
         /**
-          * User Score: Calculate a user's score based on the following formula:
+          User Score: Calculate a user's score based on the following formula:
         A: If the user got more than 90% of their answers correct throughout the whole tournament
         B: If the user got 75%-90% of their answers correct throughout the whole tournament
         C: If the user got 60%-75% of their answers correct throughout the whole tournament
@@ -95,16 +95,20 @@ namespace Tournament.Logic
             return 'F';
         }
 
-        /*****
+        /**
          * fetchTournamentStatistics: Return a JSON of both Success Per Question and User Score statistics.
-         */
-        public async Task<List<TournamentStatistics>> fetchTournamentStatistics(Guid tournamentId)
+        */
+        public async Task<TournamentStatistics> fetchTournamentStatistics(Guid tournamentId)
         {
             _logger?.LogInformation($"fetchTournamentStatistics tournament: {tournamentId}");
-            var result = await _tournamentRepository.getTournamentResults(tournamentId);
-            return null;
+            IEnumerable<Tuple<int, double>> currrentSuccessPerQuestion = await fetchSuccessPerQuestion(tournamentId);
+            IList<Tuple<Guid, char>> currentUserScores = await fetchUsersScores(tournamentId);
+            return new TournamentStatistics()
+            {
+                successPerQuestion = currrentSuccessPerQuestion,
+                userScores = currentUserScores
+            };
         }
- 
 
         public async Task<TournamentData> getTournamentResults(Guid tournamentId)
         {

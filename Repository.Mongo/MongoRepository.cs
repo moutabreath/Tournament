@@ -55,8 +55,7 @@ namespace Tournamnent.Repository.Mongo
             {
                 _logger?.LogError($"getTournamentResults Error when getting tournament {tournamentId}", ex);
                 return null;
-            }
-            
+            }            
         }
 
         public async Task saveTournamentResults(TournamentData tournament)

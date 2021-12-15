@@ -13,7 +13,7 @@ namespace Tournament.Interfaces
 
         public Task<IList<Tuple<Guid, char>>> fetchUsersScores(Guid tournamentId);
 
-        public Task<List<TournamentStatistics>> fetchTournamentStatistics(Guid tournamentId);
+        public Task<TournamentStatistics> fetchTournamentStatistics(Guid tournamentId);
         
     }
 }

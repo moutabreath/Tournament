@@ -12,3 +12,5 @@
 /.ionide/symbolCache.db
 /.vs/Tournament/DesignTimeBuild/.dtbcache.v2
 /Tournament.Logic/obj
+/Interfaces/bin/Debug/net6.0
+/Tournament.Common/bin/Debug/net6.0

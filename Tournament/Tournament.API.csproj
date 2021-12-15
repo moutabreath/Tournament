@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Tournament.Interfaces.csproj" />
     <ProjectReference Include="..\Tournament.Common\Tournament.Common.Objects.csproj" />
   </ItemGroup>
 

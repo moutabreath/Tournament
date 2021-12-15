@@ -16,12 +16,12 @@ namespace Tournament.Logic
             _tournamentRepository = tournamentRepository;
             _logger = logger;
         }
+
         /***
          * 
          * Success Per Question: The percentage of users who answered it correctly
-Note: This will be a list of questions with a percentage attached to each one
+           Note: This will be a list of questions with a percentage attached to each one
          */
-
         public async Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(Guid tournamentId)
         {
             _logger?.LogInformation($"fetchSuccessPerQuestion tournament: {tournamentId}");
@@ -56,18 +56,43 @@ Note: This will be a list of questions with a percentage attached to each one
         }
 
         /**
-  * User Score: Calculate a user's score based on the following formula:
-A: If the user got more than 90% of their answers correct throughout the whole tournament
-B: If the user got 75%-90% of their answers correct throughout the whole tournament
-C: If the user got 60%-75% of their answers correct throughout the whole tournament
-F: If the user got less than 60% of their answers correct throughout the whole tournament
-Note: This will be a list of users with a score letter attached to each one.
-  */
-        public async Task<List<UserScore>> fetchUsersScores(Guid tournamentId)
+          * User Score: Calculate a user's score based on the following formula:
+        A: If the user got more than 90% of their answers correct throughout the whole tournament
+        B: If the user got 75%-90% of their answers correct throughout the whole tournament
+        C: If the user got 60%-75% of their answers correct throughout the whole tournament
+        F: If the user got less than 60% of their answers correct throughout the whole tournament
+        Note: This will be a list of users with a score letter attached to each one.
+          */
+        public async Task<IList<Tuple<Guid, char>>> fetchUsersScores(Guid tournamentId)
         {
             _logger?.LogInformation($"fetchUsersScores tournament: {tournamentId}");
             var result = await _tournamentRepository.getTournamentResults(tournamentId);
-            return null;
+            IList<Tuple<Guid, char>> usersScore = new List<Tuple<Guid, char>>();
+            foreach(var userScore in result.results)
+            {
+                int numOfQuestions = userScore.incorrectQuestions.Count + userScore.correctQuestions.Count;
+                double successRate = userScore.correctQuestions.Count / numOfQuestions;
+                usersScore.Add(new Tuple<Guid, char> (userScore.userId, ConvertPercentageToScore(successRate)));
+            }
+            return usersScore;
+        }
+
+        private char ConvertPercentageToScore(double successRate)
+        {
+            if (successRate > 90)
+            {
+                return 'A';
+            }
+            if (75 < successRate && successRate <= 90)
+            {
+                return 'B';
+            }
+            if (60 < successRate && successRate <= 75)
+            {
+                return 'C';
+            }
+
+            return 'F';
         }
 
         /*****

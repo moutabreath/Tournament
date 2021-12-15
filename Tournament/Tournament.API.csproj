@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Responses\**" />
+    <Content Remove="Responses\**" />
+    <EmbeddedResource Remove="Responses\**" />
+    <None Remove="Responses\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -17,10 +24,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Tournament.Interfaces.csproj" />
     <ProjectReference Include="..\Tournament.Common\Tournament.Common.Objects.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Responses\" />
   </ItemGroup>
 
 </Project>

@@ -16,23 +16,53 @@ namespace Tournament.Logic
             _tournamentRepository = tournamentRepository;
             _logger = logger;
         }
+        /***
+         * 
+         * Success Per Question: The percentage of users who answered it correctly
+Note: This will be a list of questions with a percentage attached to each one
+         */
 
-
-        public async Task<TournamentStatistics> fetchSuccessPerQuestion(Guid tournamentId)
+        public async Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(Guid tournamentId)
         {
             _logger?.LogInformation($"fetchSuccessPerQuestion tournament: {tournamentId}");
             var result = await _tournamentRepository.getTournamentResults(tournamentId);
-            return new TournamentStatistics();
+            IDictionary<int,int> questionsSuccesses = new Dictionary<int, int>();// Save the number of times a question has been answered correctly by a user
+
+            // First find all the questions in the tournament
+            List<int> firstSucesses = result.results.First().correctQuestions;
+            foreach(var question in firstSucesses)
+            {
+                questionsSuccesses.Add(question, 1);
+            }
+            List<int> firstFailures = result.results.First().incorrectQuestions;
+            foreach(var question in firstFailures)
+            {
+                questionsSuccesses.Add(question, 0);
+            }
+            // Second, add 1 to each question,everytime it appears on a success of a user
+            foreach(var userResult in result.results.TakeLast(result.results.Count - 1))// Take all items except first, which has already been calculated
+            {
+                List<int> userSuccesses = userResult.correctQuestions;
+                foreach (var question in userSuccesses)
+                {
+                    questionsSuccesses.TryGetValue(question, out int currentSuccess);
+                    currentSuccess++;
+                    questionsSuccesses.Remove(question);
+                    questionsSuccesses.Add(question, currentSuccess);
+                }
+            }
+            IEnumerable<Tuple<int, double>> successPerQuestion = questionsSuccesses.Select(questionSuccess => new Tuple<int, double>(questionSuccess.Key, questionSuccess.Value / questionsSuccesses.Count));
+            return successPerQuestion;
         }
 
-        public async Task<List<TournamentStatistics>> fetchTournamentStatistics(Guid tournamentId)
-        {
-            _logger?.LogInformation($"fetchTournamentStatistics tournament: {tournamentId}");
-            var result = await _tournamentRepository.getTournamentResults(tournamentId);
-            return null;
-
-        }
-
+        /**
+  * User Score: Calculate a user's score based on the following formula:
+A: If the user got more than 90% of their answers correct throughout the whole tournament
+B: If the user got 75%-90% of their answers correct throughout the whole tournament
+C: If the user got 60%-75% of their answers correct throughout the whole tournament
+F: If the user got less than 60% of their answers correct throughout the whole tournament
+Note: This will be a list of users with a score letter attached to each one.
+  */
         public async Task<List<UserScore>> fetchUsersScores(Guid tournamentId)
         {
             _logger?.LogInformation($"fetchUsersScores tournament: {tournamentId}");
@@ -40,16 +70,27 @@ namespace Tournament.Logic
             return null;
         }
 
+        /*****
+         * fetchTournamentStatistics: Return a JSON of both Success Per Question and User Score statistics.
+         */
+        public async Task<List<TournamentStatistics>> fetchTournamentStatistics(Guid tournamentId)
+        {
+            _logger?.LogInformation($"fetchTournamentStatistics tournament: {tournamentId}");
+            var result = await _tournamentRepository.getTournamentResults(tournamentId);
+            return null;
+        }
+ 
+
         public async Task<TournamentData> getTournamentResults(Guid tournamentId)
         {
             _logger?.LogInformation($"getTournamentResults tournament: {tournamentId}");
-            var result = _tournamentRepository.getTournamentResults(tournamentId);
-            return null;
+            var result = await _tournamentRepository.getTournamentResults(tournamentId);
+            return result;
         }
 
         public async Task saveTournamentResults(TournamentData tournament)
         {
-            _logger?.LogInformation($"saveTournamentResults tournament: {tournament.tournamentId}");
+            _logger?.LogInformation(message: $"saveTournamentResults tournament: {tournament.tournamentId}");
             await _tournamentRepository.saveTournamentResults(tournament);
         }
     }

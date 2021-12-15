@@ -4,13 +4,6 @@
 
 /Interfaces/obj
 /.vscode
-/.vs/Tournament/v17
-/.vs/Tournament/project-colors.json
-/Repository.Mongo/obj
-/Tournament/obj
-/Tournament.Common/obj
-/.ionide/symbolCache.db
-/.vs/Tournament/DesignTimeBuild/.dtbcache.v2
-/Tournament.Logic/obj
-/Interfaces/bin/Debug/net6.0
-/Tournament.Common/bin/Debug/net6.0
+/.vs/*
+/*/obj
+/*/bin

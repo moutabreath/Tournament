@@ -11,7 +11,7 @@ namespace Tournament.Controllers
     { 
 
         [HttpPost]
-        public async Task saveTournamentResults([FromBody] Common.Objects.Tournament tournament)
+        public async Task saveTournamentResults([FromBody] Common.Objects.TournamentData tournament)
         {
 
         }

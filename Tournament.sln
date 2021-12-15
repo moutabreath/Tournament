@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament.API", "Tournament\Tournament.API.csproj", "{DC56136E-AD3F-4A9A-BDBC-B6B8C669E60B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tournament.API", "Tournament\Tournament.API.csproj", "{DC56136E-AD3F-4A9A-BDBC-B6B8C669E60B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament.Interfaces", "Interfaces\Tournament.Interfaces.csproj", "{0B8394A8-1E01-4519-A896-78ED276D9A43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tournament.Interfaces", "Interfaces\Tournament.Interfaces.csproj", "{0B8394A8-1E01-4519-A896-78ED276D9A43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournamnent.Repository.Mongo", "Repository.Mongo\Tournamnent.Repository.Mongo.csproj", "{14FBC04D-0EFF-4B51-BDAB-1767D8EF6A1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tournamnent.Repository.Mongo", "Repository.Mongo\Tournamnent.Repository.Mongo.csproj", "{14FBC04D-0EFF-4B51-BDAB-1767D8EF6A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament.Common.Objects", "Tournament.Common\Tournament.Common.Objects.csproj", "{7B113595-C48B-4C37-82BF-7D8553AB34A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tournament.Common.Objects", "Tournament.Common\Tournament.Common.Objects.csproj", "{7B113595-C48B-4C37-82BF-7D8553AB34A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament.Logic", "Tournament.Logic\Tournament.Logic.csproj", "{43075E81-BA43-4994-8DA1-5DC025C24A85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7B113595-C48B-4C37-82BF-7D8553AB34A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B113595-C48B-4C37-82BF-7D8553AB34A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B113595-C48B-4C37-82BF-7D8553AB34A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43075E81-BA43-4994-8DA1-5DC025C24A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43075E81-BA43-4994-8DA1-5DC025C24A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43075E81-BA43-4994-8DA1-5DC025C24A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43075E81-BA43-4994-8DA1-5DC025C24A85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

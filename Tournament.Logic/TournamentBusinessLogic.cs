@@ -67,12 +67,12 @@ namespace Tournament.Logic
         {
             _logger?.LogInformation($"fetchUsersScores tournament: {tournamentId}");
             var result = await _tournamentRepository.getTournamentResults(tournamentId);
-            IList<Tuple<Guid, char>> usersScore = new List<Tuple<Guid, char>>();
+            IList<Tuple<int, char>> usersScore = new List<Tuple<int, char>>();
             foreach(var userScore in result.results)
             {
                 int numOfQuestions = userScore.incorrectQuestions.Count + userScore.correctQuestions.Count;
                 double successRate = userScore.correctQuestions.Count / numOfQuestions;
-                usersScore.Add(new Tuple<Guid, char> (userScore.userId, ConvertPercentageToScore(successRate)));
+                usersScore.Add(new Tuple<int, char> (userScore.userId, ConvertPercentageToScore(successRate)));
             }
             return usersScore;
         }

@@ -10,7 +10,7 @@
 
     public class UserResult
     {
-        public Guid userId { get; set; }
+        public int userId { get; set; }
         public List<int> correctQuestions { get; set; } = new List<int>();
         public List<int> incorrectQuestions { get; set; } = new List<int>();
     }

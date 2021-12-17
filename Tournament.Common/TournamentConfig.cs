@@ -2,8 +2,9 @@
 {
     public class TournamentConfig
     {
+        public const string Position = "MongoConfig";
         public string MongoConnectionString { get; set; }
-        public string MongoCatanGameDbName { get; set; }
-        public string MongoCatanActivePlayerDbName { get; set; }
+        public string MongoDbName { get; set; }
+        public string MongoDocumentName { get; set; }
     }
 }

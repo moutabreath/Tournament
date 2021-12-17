@@ -19,11 +19,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Interfaces\Tournament.Interfaces.csproj" />
+    <ProjectReference Include="..\Repository.Mongo\Tournamnent.Repository.Mongo.csproj" />
     <ProjectReference Include="..\Tournament.Common\Tournament.Common.Objects.csproj" />
+    <ProjectReference Include="..\Tournament.Logic\Tournament.Logic.csproj" />
   </ItemGroup>
 
 </Project>

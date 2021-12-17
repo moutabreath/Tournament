@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -9,23 +10,21 @@ namespace Tournamnent.Repository.Mongo
 {
     public class MongoRepository : ITournamentRepository
     {
-
         protected readonly ILogger<MongoRepository> _logger;
 
-        protected readonly string _documentName;
         protected MongoClient Client { get; set; }
         protected IMongoDatabase Database { get; set; }
         protected IMongoCollection<TournamentData> MongoCollection { get; set; }
 
-        public MongoRepository(ILogger<MongoRepository> logger, IOptions<TournamentConfig> options, string documentName)
-        {
+        public MongoRepository(ILogger<MongoRepository> logger, IOptions<TournamentConfig> options)
+        {          
+        
             _logger = logger;
 
-            _documentName = documentName;
             TournamentConfig configuration = options.Value;
             Client = new MongoClient(configuration.MongoConnectionString);
-            Database = Client.GetDatabase(configuration.MongoCatanGameDbName);
-            MongoCollection = Database.GetCollection<TournamentData>(_documentName);
+            Database = Client.GetDatabase(configuration.MongoDbName);
+            MongoCollection = Database.GetCollection<TournamentData>(configuration.MongoDocumentName);
             InitializeClassMap();
         }
 
@@ -64,7 +63,6 @@ namespace Tournamnent.Repository.Mongo
             {
                 if (tournament.tournamentId == Guid.Empty) tournament.tournamentId = Guid.NewGuid();
                 _logger?.LogInformation($"saveTournamentResults tournament: {tournament.tournamentId}");
-                IMongoCollection<TournamentData> gameCollection = Database.GetCollection<TournamentData>(_documentName);
                 FilterDefinition<TournamentData> filter = Builders<TournamentData>.Filter.Where(tour => tour.tournamentId == tournament.tournamentId);
                 await MongoCollection.ReplaceOneAsync(filter, tournament, new ReplaceOptions { IsUpsert = true });
             }

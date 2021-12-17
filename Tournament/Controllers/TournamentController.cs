@@ -5,7 +5,7 @@ using Tournament.Interfaces;
 namespace Tournament.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TournamentController : ControllerBase 
     {

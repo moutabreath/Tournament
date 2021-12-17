@@ -61,7 +61,6 @@ namespace Tournamnent.Repository.Mongo
         {
             try
             {
-                if (tournament.tournamentId == Guid.Empty) tournament.tournamentId = Guid.NewGuid();
                 _logger?.LogInformation($"saveTournamentResults tournament: {tournament.tournamentId}");
                 FilterDefinition<TournamentData> filter = Builders<TournamentData>.Filter.Where(tour => tour.tournamentId == tournament.tournamentId);
                 await MongoCollection.ReplaceOneAsync(filter, tournament, new ReplaceOptions { IsUpsert = true });

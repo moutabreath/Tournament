@@ -2,6 +2,7 @@
 {
     public class TournamentData
     {
+        public Guid Id { get; set; }
         public int tournamentId { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDateTime { get; set; }

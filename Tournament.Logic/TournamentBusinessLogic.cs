@@ -25,22 +25,22 @@ namespace Tournament.Logic
         public async Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(int tournamentId)
         {
             _logger?.LogInformation($"fetchSuccessPerQuestion tournament: {tournamentId}");
-            var result = await _tournamentRepository.getTournamentResults(tournamentId);
+            var tournamentResult = await _tournamentRepository.getTournamentResults(tournamentId);
             IDictionary<int,int> questionsSuccesses = new Dictionary<int, int>();// Save the number of times a question has been answered correctly by a user
-
+            IList<Tuple<int,double>> questionsPercentages = new List<Tuple<int,double>>();
             // First find all the questions in the tournament
-            List<int> firstSucesses = result.results.First().correctQuestions;
+            List<int> firstSucesses = tournamentResult.results.First().correctQuestions;
             foreach(var question in firstSucesses)
             {
                 questionsSuccesses.Add(question, 1);
             }
-            List<int> firstFailures = result.results.First().incorrectQuestions;
+            List<int> firstFailures = tournamentResult.results.First().incorrectQuestions;
             foreach(var question in firstFailures)
             {
                 questionsSuccesses.Add(question, 0);
             }
             // Second, add 1 to each question,everytime it appears on a success of a user
-            foreach(var userResult in result.results.TakeLast(result.results.Count - 1))// Take all items except first, which has already been calculated
+            foreach(var userResult in tournamentResult.results.TakeLast(tournamentResult.results.Count - 1))// Take all items except first, which has already been calculated
             {
                 List<int> userSuccesses = userResult.correctQuestions;
                 foreach (var question in userSuccesses)
@@ -51,8 +51,10 @@ namespace Tournament.Logic
                     questionsSuccesses.Add(question, currentSuccess);
                 }
             }
-            IEnumerable<Tuple<int, double>> successPerQuestion = questionsSuccesses.Select(questionSuccess => new Tuple<int, double>(questionSuccess.Key, questionSuccess.Value / questionsSuccesses.Count));
-            return successPerQuestion;
+            foreach(var question in questionsSuccesses){
+                questionsPercentages.Add(new Tuple<int, double> (question.Key, (double)((double)question.Value / (double)tournamentResult.results.Count)));
+            }
+            return questionsPercentages;
         }
 
         /**

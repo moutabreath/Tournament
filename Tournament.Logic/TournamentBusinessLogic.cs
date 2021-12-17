@@ -22,7 +22,7 @@ namespace Tournament.Logic
          * Success Per Question: The percentage of users who answered it correctly
            Note: This will be a list of questions with a percentage attached to each one
          */
-        public async Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(Guid tournamentId)
+        public async Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(int tournamentId)
         {
             _logger?.LogInformation($"fetchSuccessPerQuestion tournament: {tournamentId}");
             var result = await _tournamentRepository.getTournamentResults(tournamentId);
@@ -63,7 +63,7 @@ namespace Tournament.Logic
         F: If the user got less than 60% of their answers correct throughout the whole tournament
         Note: This will be a list of users with a score letter attached to each one.
           */
-        public async Task<IList<Tuple<int, char>>> fetchUsersScores(Guid tournamentId)
+        public async Task<IList<Tuple<int, char>>> fetchUsersScores(int tournamentId)
         {
             _logger?.LogInformation($"fetchUsersScores tournament: {tournamentId}");
             var result = await _tournamentRepository.getTournamentResults(tournamentId);
@@ -98,7 +98,7 @@ namespace Tournament.Logic
         /**
          * fetchTournamentStatistics: Return a JSON of both Success Per Question and User Score statistics.
         */
-        public async Task<TournamentStatistics> fetchTournamentStatistics(Guid tournamentId)
+        public async Task<TournamentStatistics> fetchTournamentStatistics(int tournamentId)
         {
             _logger?.LogInformation($"fetchTournamentStatistics tournament: {tournamentId}");
             IEnumerable<Tuple<int, double>> currrentSuccessPerQuestion = await fetchSuccessPerQuestion(tournamentId);
@@ -110,7 +110,7 @@ namespace Tournament.Logic
             };
         }
 
-        public async Task<TournamentData> getTournamentResults(Guid tournamentId)
+        public async Task<TournamentData> getTournamentResults(int tournamentId)
         {
             _logger?.LogInformation($"getTournamentResults tournament: {tournamentId}");
             var result = await _tournamentRepository.getTournamentResults(tournamentId);

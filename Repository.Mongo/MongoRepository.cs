@@ -35,14 +35,15 @@ namespace Tournamnent.Repository.Mongo
                 BsonClassMap.RegisterClassMap<TournamentData>(bsonClassMap =>
                 {
                     bsonClassMap.AutoMap();
-                    bsonClassMap.SetIdMember(bsonClassMap.GetMemberMap(tournament => tournament.tournamentId));
                     bsonClassMap.SetIgnoreExtraElements(true);
+                    //bsonClassMap.MapProperty(tour => tour.Id).SetElementName("_id");
+                    //bsonClassMap.SetIdMember(bsonClassMap.GetMemberMap(tournament => tournament.Id));
                 });
             }
         }
 
 
-        public async Task<TournamentData> getTournamentResults(Guid tournamentId)
+        public async Task<TournamentData> getTournamentResults(int tournamentId)
         {
             _logger?.LogInformation($"getTournamentResults tournament: {tournamentId}");
             try

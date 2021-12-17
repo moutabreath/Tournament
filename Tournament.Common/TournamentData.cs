@@ -2,7 +2,7 @@
 {
     public class TournamentData
     {
-        public Guid tournamentId { get; set; }
+        public int tournamentId { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDateTime { get; set; }
         public List<UserResult> results { get; set; } = new List<UserResult>();

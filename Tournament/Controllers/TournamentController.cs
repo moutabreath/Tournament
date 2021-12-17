@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tournament.Common.Objects;
 using Tournament.Interfaces;
+using Microsoft.AspNetCore.Cors;
 
 namespace Tournament.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]
+    [EnableCors]
     [ApiController]
     public class TournamentController : ControllerBase 
     {
@@ -26,7 +28,7 @@ namespace Tournament.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> getTournamentResults([FromBody] Guid tournamentId)
+        public async Task<JsonResult> getTournamentResults([FromBody] int tournamentId)
         {
             _logger?.LogInformation($"getTournamentResults tournament: {tournamentId}");
             var result = await _tournamentBusinessLogic.getTournamentResults(tournamentId);
@@ -34,7 +36,7 @@ namespace Tournament.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> fetchSuccessPerQuestion([FromBody] Guid tournamentId)
+        public async Task<JsonResult> fetchSuccessPerQuestion([FromBody] int tournamentId)
         {
             _logger?.LogInformation($"fetchSuccessPerQuestion tournament: {tournamentId}");
             var result = await _tournamentBusinessLogic.fetchSuccessPerQuestion(tournamentId);
@@ -42,7 +44,7 @@ namespace Tournament.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> fetchUsersScores([FromBody] Guid tournamentId)
+        public async Task<JsonResult> fetchUsersScores([FromBody] int tournamentId)
         {
             _logger?.LogInformation($"fetchUsersScores tournament: {tournamentId}");
             var result = await _tournamentBusinessLogic.fetchUsersScores(tournamentId);
@@ -50,7 +52,7 @@ namespace Tournament.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> fetchTournamentStatistics([FromBody] Guid tournamentId)
+        public async Task<JsonResult> fetchTournamentStatistics([FromBody] int tournamentId)
         {
             _logger?.LogInformation($"fetchTournamentStatistics tournament: {tournamentId}");
             var result = await _tournamentBusinessLogic.fetchTournamentStatistics(tournamentId);

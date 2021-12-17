@@ -7,13 +7,13 @@ namespace Tournament.Interfaces
     {
         public Task saveTournamentResults(TournamentData tournament);
 
-        public Task<TournamentData> getTournamentResults(Guid tournamentId);
+        public Task<TournamentData> getTournamentResults(int tournamentId);
 
-        public Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(Guid tournamentId);
+        public Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(int tournamentId);
 
-        public Task<IList<Tuple<int, char>>> fetchUsersScores(Guid tournamentId);
+        public Task<IList<Tuple<int, char>>> fetchUsersScores(int tournamentId);
 
-        public Task<TournamentStatistics> fetchTournamentStatistics(Guid tournamentId);
+        public Task<TournamentStatistics> fetchTournamentStatistics(int tournamentId);
         
     }
 }

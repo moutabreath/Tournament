@@ -7,6 +7,6 @@ namespace Tournament.Interfaces
 
         public Task saveTournamentResults(TournamentData tournament);
 
-        public Task<TournamentData> getTournamentResults(Guid tournamentId);
+        public Task<TournamentData> getTournamentResults(int tournamentId);
     }
 }

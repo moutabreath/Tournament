@@ -4,11 +4,24 @@ using Tournament.Interfaces;
 using Tournament.Logic;
 using Tournamnent.Repository.Mongo;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ITournamentBusinessLogic, TournamentBusinessLogic>();
 builder.Services.AddScoped<ITournamentRepository, MongoRepository>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost/", "https://localhost/");
+                      });
+});
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -24,15 +37,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    //builder.Configuration.AddJsonFile("appsettings.Development.json");
-}
-else
-{
-    //builder.Configuration.AddJsonFile("appsettings.json");
 }
 app.UseHttpsRedirection();
-
-//app.UseAuthorization();
+app.UseRouting();
+app.UseCors(MyAllowSpecificOrigins);
+app.UseAuthorization();
 
 app.MapControllers();
 

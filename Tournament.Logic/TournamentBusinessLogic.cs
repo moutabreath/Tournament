@@ -63,7 +63,7 @@ namespace Tournament.Logic
         F: If the user got less than 60% of their answers correct throughout the whole tournament
         Note: This will be a list of users with a score letter attached to each one.
           */
-        public async Task<IList<Tuple<Guid, char>>> fetchUsersScores(Guid tournamentId)
+        public async Task<IList<Tuple<int, char>>> fetchUsersScores(Guid tournamentId)
         {
             _logger?.LogInformation($"fetchUsersScores tournament: {tournamentId}");
             var result = await _tournamentRepository.getTournamentResults(tournamentId);

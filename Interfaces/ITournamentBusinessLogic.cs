@@ -11,7 +11,7 @@ namespace Tournament.Interfaces
 
         public Task<IEnumerable<Tuple<int, double>>> fetchSuccessPerQuestion(Guid tournamentId);
 
-        public Task<IList<Tuple<Guid, char>>> fetchUsersScores(Guid tournamentId);
+        public Task<IList<Tuple<int, char>>> fetchUsersScores(Guid tournamentId);
 
         public Task<TournamentStatistics> fetchTournamentStatistics(Guid tournamentId);
         

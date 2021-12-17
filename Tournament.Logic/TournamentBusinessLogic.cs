@@ -102,7 +102,7 @@ namespace Tournament.Logic
         {
             _logger?.LogInformation($"fetchTournamentStatistics tournament: {tournamentId}");
             IEnumerable<Tuple<int, double>> currrentSuccessPerQuestion = await fetchSuccessPerQuestion(tournamentId);
-            IList<Tuple<Guid, char>> currentUserScores = await fetchUsersScores(tournamentId);
+            IList<Tuple<int, char>> currentUserScores = await fetchUsersScores(tournamentId);
             return new TournamentStatistics()
             {
                 successPerQuestion = currrentSuccessPerQuestion,

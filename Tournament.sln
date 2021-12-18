@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tournamnent.Repository.Mong
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tournament.Common.Objects", "Tournament.Common\Tournament.Common.Objects.csproj", "{7B113595-C48B-4C37-82BF-7D8553AB34A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament.Logic", "Tournament.Logic\Tournament.Logic.csproj", "{43075E81-BA43-4994-8DA1-5DC025C24A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tournament.Logic", "Tournament.Logic\Tournament.Logic.csproj", "{43075E81-BA43-4994-8DA1-5DC025C24A85}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9EB93C77-5D6A-4171-BADD-A9CDEBFAB7D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{43075E81-BA43-4994-8DA1-5DC025C24A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43075E81-BA43-4994-8DA1-5DC025C24A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43075E81-BA43-4994-8DA1-5DC025C24A85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EB93C77-5D6A-4171-BADD-A9CDEBFAB7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EB93C77-5D6A-4171-BADD-A9CDEBFAB7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EB93C77-5D6A-4171-BADD-A9CDEBFAB7D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EB93C77-5D6A-4171-BADD-A9CDEBFAB7D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

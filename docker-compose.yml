@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  mongo:
+   image: mongo
+   restart: always
+
+  tournament.api:
+    #image: ${DOCKER_REGISTRY-}tournamentapi
+    depends_on:
+        - mongo
+    build:
+      context: .
+      dockerfile: Tournament/Dockerfile

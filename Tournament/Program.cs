@@ -4,22 +4,11 @@ using Tournament.Interfaces;
 using Tournament.Logic;
 using Tournamnent.Repository.Mongo;
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ITournamentBusinessLogic, TournamentBusinessLogic>();
 builder.Services.AddScoped<ITournamentRepository, MongoRepository>();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder =>
-                      {
-                          builder.WithOrigins("http://localhost/", "https://localhost/");
-                      });
-});
 
 
 builder.Services.AddControllers();
@@ -40,7 +29,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthorization();
 
 app.MapControllers();

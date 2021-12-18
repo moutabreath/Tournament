@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tournament.Common.Objects;
 using Tournament.Interfaces;
-using Microsoft.AspNetCore.Cors;
 
 namespace Tournament.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]
-    [EnableCors]
     [ApiController]
     public class TournamentController : ControllerBase 
     {

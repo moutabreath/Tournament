@@ -73,7 +73,7 @@ namespace Tournament.Logic
             foreach(var userScore in result.results)
             {
                 int numOfQuestions = userScore.incorrectQuestions.Count + userScore.correctQuestions.Count;
-                double successRate = userScore.correctQuestions.Count / numOfQuestions;
+                double successRate = (double)userScore.correctQuestions.Count / (double)numOfQuestions;
                 usersScore.Add(new Tuple<int, char> (userScore.userId, ConvertPercentageToScore(successRate)));
             }
             return usersScore;
@@ -81,15 +81,15 @@ namespace Tournament.Logic
 
         private char ConvertPercentageToScore(double successRate)
         {
-            if (successRate > 90)
+            if (successRate > 0.90)
             {
                 return 'A';
             }
-            if (75 < successRate && successRate <= 90)
+            if (0.75 < successRate && successRate <= 0.90)
             {
                 return 'B';
             }
-            if (60 < successRate && successRate <= 75)
+            if (0.60 < successRate && successRate <= 0.75)
             {
                 return 'C';
             }
